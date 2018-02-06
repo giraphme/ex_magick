@@ -12,7 +12,6 @@ defmodule ExMagick.MixProject do
         maintainers: ["Tamaki Maeda"],
         licenses: ["MIT"],
         links: %{
-          "Documentation" => "https://hexdocs.pm/ex_magick",
           "GitHub" => "https://github.com/giraphme/ex_magick"
         }
       ],
