@@ -10,7 +10,7 @@ However, we don't test all options, so please create an issue if you have option
 ```elixir
 def deps do
   [
-    {:ex_magick, "~> 0.1.0"}
+    {:ex_magick, "~> 0.2.0"}
   ]
 end
 ```
@@ -19,7 +19,7 @@ end
 
 ```elixir
 ExMagick.init()
-|> ExMagick.open("path/to/input.jpg")
+|> ExMagick.put_file("path/to/input.jpg")
 |> ExMagick.put_option("size", "150x150")
 |> ExMagick.output("path/to/output.png")
 ```
@@ -28,7 +28,7 @@ ExMagick.init()
 
 ```elixir
 ExMagick.init()
-|> ExMagick.open_with_base64("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAH6Nf8rAAAABGdBTUEAALGPC/xhBQAAAD9JREFUGBlj/A8EDEDABCLAACQC5jHC5EDCcA5cIZwBl4Loh5BwWWRB4lVi1U68IFaLkF0CY2M1EiaJTA+gQgApmhwFHvIPpAAAAABJRU5ErkJggg==")
+|> ExMagick.put_base64_file("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAH6Nf8rAAAABGdBTUEAALGPC/xhBQAAAD9JREFUGBlj/A8EDEDABCLAACQC5jHC5EDCcA5cIZwBl4Loh5BwWWRB4lVi1U68IFaLkF0CY2M1EiaJTA+gQgApmhwFHvIPpAAAAABJRU5ErkJggg==")
 |> ExMagick.output("path/to/output.png")
 ```
 
@@ -37,7 +37,7 @@ ExMagick.init()
 ```elixir
 ExMagick.init()
 |> ExMagick.put_option("size", "150x150")
-|> ExMagick.open_with_color("#ffaa00")
+|> ExMagick.put_color("#ffaa00")
 |> ExMagick.output("path/to/output.png")
 ```
 
@@ -46,7 +46,7 @@ ExMagick.init()
 ```elixir
 ExMagick.init()
 |> ExMagick.put_option("size", "150x150")
-|> ExMagick.open_with_color("#000000-#ffffff", fill: :gradient)
+|> ExMagick.put_color("#000000-#ffffff", fill: :gradient)
 |> ExMagick.output("path/to/output.png")
 ```
 
@@ -54,7 +54,7 @@ ExMagick.init()
 
 ```elixir
 ExMagick.init()
-|> ExMagick.open("path/to/input.jpg")
+|> ExMagick.put_file("path/to/input.jpg")
 |> ExMagick.put_option("size", "150x150")
 |> ExMagick.put_option("rotate", "-90")
 |> ExMagick.output("path/to/output.png")
