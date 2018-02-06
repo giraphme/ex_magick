@@ -1,11 +1,11 @@
 # ExMagick
 
-**TODO: Add description**
+ExMagick is a package to make it easy to build ImageMagick commands with Elixir.
+
+Perhaps it supports all of the options supported by ImageMagick.
+However, we don't test all options, so please create an issue if you have options that can not be used.
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_magick` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,7 +15,50 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_magick](https://hexdocs.pm/ex_magick).
+## Usage
 
+```elixir
+ExMagick.init()
+|> ExMagick.open("path/to/input.jpg")
+|> ExMagick.put_option("size", "150x150")
+|> ExMagick.output("path/to/output.png")
+```
+
+### Decode base64 encoded image
+
+```elixir
+ExMagick.init()
+|> ExMagick.open_with_base64("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAH6Nf8rAAAABGdBTUEAALGPC/xhBQAAAD9JREFUGBlj/A8EDEDABCLAACQC5jHC5EDCcA5cIZwBl4Loh5BwWWRB4lVi1U68IFaLkF0CY2M1EiaJTA+gQgApmhwFHvIPpAAAAABJRU5ErkJggg==")
+|> ExMagick.output("path/to/output.png")
+```
+
+### Generate filled image
+
+```elixir
+ExMagick.init()
+|> ExMagick.put_option("size", "150x150")
+|> ExMagick.open_with_color("#ffaa00")
+|> ExMagick.output("path/to/output.png")
+```
+
+### Generate gradient image
+
+```elixir
+ExMagick.init()
+|> ExMagick.put_option("size", "150x150")
+|> ExMagick.open_with_color("#000000-#ffffff", fill: gradient)
+|> ExMagick.output("path/to/output.png")
+```
+
+### Use other options
+
+```elixir
+ExMagick.init()
+|> ExMagick.open("path/to/input.jpg")
+|> ExMagick.put_option("size", "150x150")
+|> ExMagick.put_option("rotate", "-90")
+|> ExMagick.output("path/to/output.png")
+```
+
+## License
+This project is licensed under the terms of the MIT license, see LICENSE.
