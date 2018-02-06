@@ -46,7 +46,7 @@ ExMagick.init()
 ```elixir
 ExMagick.init()
 |> ExMagick.put_option("size", "150x150")
-|> ExMagick.open_with_color("#000000-#ffffff", fill: gradient)
+|> ExMagick.open_with_color("#000000-#ffffff", fill: :gradient)
 |> ExMagick.output("path/to/output.png")
 ```
 
