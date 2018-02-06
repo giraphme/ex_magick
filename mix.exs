@@ -5,8 +5,17 @@ defmodule ExMagick.MixProject do
     [
       app: :ex_magick,
       version: "0.1.0",
-      elixir: "~> 1.6",
+      elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
+      description: "Simply ImageMagick wrapper for Elixir",
+      package: [
+        maintainers: ["Tamaki Maeda"],
+        licenses: ["MIT"],
+        links: %{
+          "Documentation" => "https://hexdocs.pm/ex_magick",
+          "GitHub" => "https://github.com/giraphme/ex_magick"
+        }
+      ],
       deps: deps()
     ]
   end
