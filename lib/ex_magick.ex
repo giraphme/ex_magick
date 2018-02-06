@@ -19,11 +19,11 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_file("test.png")
+      iex> ExMagick.init() |> ExMagick.put_image("test.png")
       %ExMagick.CommandBuilder{command: "convert", options: ["test.png"]}
 
   """
-  def put_file(%Builder{} = builder, path) when is_binary(path) do
+  def put_image(%Builder{} = builder, path) when is_binary(path) do
     Builder.put_file(builder, path)
   end
 
@@ -32,11 +32,11 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_base64_file("data:image/png;base64,....")
+      iex> ExMagick.init() |> ExMagick.put_base64_image("data:image/png;base64,....")
       %ExMagick.CommandBuilder{command: "convert", options: ["inline:data:data:image/png;base64,...."]}
 
   """
-  def put_base64_file(%Builder{} = builder, encoded_image) do
+  def put_base64_image(%Builder{} = builder, encoded_image) do
     # TODO sanitize encoded_image
     Builder.put_file(builder, "inline:data:#{encoded_image}")
   end

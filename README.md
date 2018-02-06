@@ -19,7 +19,7 @@ end
 
 ```elixir
 ExMagick.init()
-|> ExMagick.put_file("path/to/input.jpg")
+|> ExMagick.put_image("path/to/input.jpg")
 |> ExMagick.put_option("size", "150x150")
 |> ExMagick.output("path/to/output.png")
 ```
@@ -28,7 +28,7 @@ ExMagick.init()
 
 ```elixir
 ExMagick.init()
-|> ExMagick.put_base64_file("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAH6Nf8rAAAABGdBTUEAALGPC/xhBQAAAD9JREFUGBlj/A8EDEDABCLAACQC5jHC5EDCcA5cIZwBl4Loh5BwWWRB4lVi1U68IFaLkF0CY2M1EiaJTA+gQgApmhwFHvIPpAAAAABJRU5ErkJggg==")
+|> ExMagick.put_base64_image("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAAH6Nf8rAAAABGdBTUEAALGPC/xhBQAAAD9JREFUGBlj/A8EDEDABCLAACQC5jHC5EDCcA5cIZwBl4Loh5BwWWRB4lVi1U68IFaLkF0CY2M1EiaJTA+gQgApmhwFHvIPpAAAAABJRU5ErkJggg==")
 |> ExMagick.output("path/to/output.png")
 ```
 
@@ -54,7 +54,7 @@ ExMagick.init()
 
 ```elixir
 ExMagick.init()
-|> ExMagick.put_file("path/to/input.jpg")
+|> ExMagick.put_image("path/to/input.jpg")
 |> ExMagick.put_option("size", "150x150")
 |> ExMagick.put_option("rotate", "-90")
 |> ExMagick.output("path/to/output.png")
