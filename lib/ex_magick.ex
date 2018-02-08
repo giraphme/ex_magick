@@ -7,7 +7,7 @@ defmodule ExMagick do
   ## Examples
 
       iex> ExMagick.init()
-      %ExMagick.CommandBuilder{command: "convert", options: []}
+      %ExMagick.CommandBuilder{command: "convert", args: []}
 
   """
   def init do
@@ -21,7 +21,7 @@ defmodule ExMagick do
 
       iex> ExMagick.init()
       ...> |> ExMagick.put_image("test.png")
-      %ExMagick.CommandBuilder{command: "convert", options: ["test.png"]}
+      %ExMagick.CommandBuilder{command: "convert", args: ["test.png"]}
 
   """
   def put_image(%Builder{} = builder, path) when is_binary(path) do
@@ -35,7 +35,7 @@ defmodule ExMagick do
 
       iex> ExMagick.init()
       ...> |> ExMagick.put_base64_image("data:image/png;base64,....")
-      %ExMagick.CommandBuilder{command: "convert", options: ["inline:data:data:image/png;base64,...."]}
+      %ExMagick.CommandBuilder{command: "convert", args: ["inline:data:data:image/png;base64,...."]}
 
   """
   def put_base64_image(%Builder{} = builder, encoded_image) do
@@ -54,10 +54,10 @@ defmodule ExMagick do
 
       iex> ExMagick.init()
       ...> |> ExMagick.put_color("#00aaff")
-      %ExMagick.CommandBuilder{command: "convert", options: ["xc:#00aaff"]}
+      %ExMagick.CommandBuilder{command: "convert", args: ["xc:#00aaff"]}
       iex> ExMagick.init()
       ...> |> ExMagick.put_color("#00aaff-#ffaa00", fill: :gradient)
-      %ExMagick.CommandBuilder{command: "convert", options: ["gradient:#00aaff-#ffaa00"]}
+      %ExMagick.CommandBuilder{command: "convert", args: ["gradient:#00aaff-#ffaa00"]}
 
   """
   def put_color(%Builder{} = builder, rgb, opts \\ [fill: :fill]) do
@@ -72,16 +72,12 @@ defmodule ExMagick do
   ## Examples
 
       iex> ExMagick.init()
-      ...> |> ExMagick.put_option("size", "150x150")
-      %ExMagick.CommandBuilder{command: "convert", options: ["-size", "150x150"]}
+      ...> |> ExMagick.put_args("size", "150x150")
+      %ExMagick.CommandBuilder{command: "convert", args: ["-size", "150x150"]}
 
   """
-  def put_option(%Builder{} = builder, key) do
-    Builder.put_option(builder, key)
-  end
-
-  def put_option(%Builder{} = builder, key, value) do
-    Builder.put_option(builder, key, value)
+  def put_args(%Builder{} = builder, key, value \\ nil, opts \\ []) do
+    Builder.put_args(builder, key, value, opts)
   end
 
   @doc """
@@ -90,7 +86,7 @@ defmodule ExMagick do
   ## Examples
 
       iex> ExMagick.init()
-      ...> |> ExMagick.put_option("size", "150x150")
+      ...> |> ExMagick.put_args("size", "150x150")
       ...> |> ExMagick.put_color("#00aaff")
       ...> |> ExMagick.output("tmp/output.png")
       {:ok, "tmp/output.png"}
@@ -105,7 +101,7 @@ defmodule ExMagick do
   def output(%Builder{} = builder, output_path) do
     builder = Builder.put_file(builder, output_path)
 
-    System.cmd(builder.command, builder.options, stderr_to_stdout: true)
+    System.cmd(builder.command, builder.args, stderr_to_stdout: true)
     |> case do
       {_, 0} -> {:ok, output_path}
       {message, _} -> {:error, message}
