@@ -19,7 +19,8 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_image("test.png")
+      iex> ExMagick.init()
+      ...> |> ExMagick.put_image("test.png")
       %ExMagick.CommandBuilder{command: "convert", options: ["test.png"]}
 
   """
@@ -32,7 +33,8 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_base64_image("data:image/png;base64,....")
+      iex> ExMagick.init()
+      ...> |> ExMagick.put_base64_image("data:image/png;base64,....")
       %ExMagick.CommandBuilder{command: "convert", options: ["inline:data:data:image/png;base64,...."]}
 
   """
@@ -50,9 +52,11 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_color("#00aaff")
+      iex> ExMagick.init()
+      ...> |> ExMagick.put_color("#00aaff")
       %ExMagick.CommandBuilder{command: "convert", options: ["xc:#00aaff"]}
-      iex> ExMagick.init() |> ExMagick.put_color("#00aaff-#ffaa00", fill: :gradient)
+      iex> ExMagick.init()
+      ...> |> ExMagick.put_color("#00aaff-#ffaa00", fill: :gradient)
       %ExMagick.CommandBuilder{command: "convert", options: ["gradient:#00aaff-#ffaa00"]}
 
   """
@@ -67,7 +71,8 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_option("size", "150x150")
+      iex> ExMagick.init()
+      ...> |> ExMagick.put_option("size", "150x150")
       %ExMagick.CommandBuilder{command: "convert", options: ["-size", "150x150"]}
 
   """
@@ -80,9 +85,15 @@ defmodule ExMagick do
 
   ## Examples
 
-      iex> ExMagick.init() |> ExMagick.put_option("size", "150x150") |> ExMagick.put_color("#00aaff") |> ExMagick.output("tmp/output.png")
+      iex> ExMagick.init()
+      ...> |> ExMagick.put_option("size", "150x150")
+      ...> |> ExMagick.put_color("#00aaff")
+      ...> |> ExMagick.output("tmp/output.png")
       {:ok, "tmp/output.png"}
-      iex> {result, _} = ExMagick.init() |> ExMagick.put_color("invalid_color_code") |> ExMagick.output("tmp/output.png")
+      iex> {result, _} =
+      ...>   ExMagick.init()
+      ...>   |> ExMagick.put_color("invalid_color_code")
+      ...>   |> ExMagick.output("tmp/output.png")
       iex> result
       :error
 
