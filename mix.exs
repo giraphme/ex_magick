@@ -4,7 +4,7 @@ defmodule ExMagick.MixProject do
   def project do
     [
       app: :ex_magick,
-      version: "0.2.1",
+      version: "0.2.2",
       elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
       description: "Simply ImageMagick wrapper for Elixir",

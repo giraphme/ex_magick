@@ -77,9 +77,28 @@ defmodule ExMagick do
 
   @doc """
   Output the image from command builder.
+
+  ## Examples
+
+      iex> ExMagick.init() |> ExMagick.put_option("size", "150x150") |> ExMagick.put_color("#00aaff") |> ExMagick.output("tmp/output.png")
+      {:ok, "tmp/output.png"}
+      iex> {result, _} = ExMagick.init() |> ExMagick.put_color("invalid_color_code") |> ExMagick.output("tmp/output.png")
+      iex> result
+      :error
+
   """
-  def output(%Builder{} = builder, output_name) do
-    builder = Builder.put_file(builder, output_name)
-    System.cmd(builder.command, builder.options)
+  def output(%Builder{} = builder, output_path) do
+    builder = Builder.put_file(builder, output_path)
+
+    System.cmd(builder.command, builder.options, stderr_to_stdout: true)
+    |> case do
+      {_, 0} -> {:ok, output_path}
+      {message, _} -> {:error, message}
+    end
+  end
+
+  def output!(%Builder{} = builder, output_path) do
+    {:ok, result_output_path} = output(builder, output_path)
+    result_output_path
   end
 end
