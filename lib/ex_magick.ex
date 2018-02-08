@@ -76,6 +76,10 @@ defmodule ExMagick do
       %ExMagick.CommandBuilder{command: "convert", options: ["-size", "150x150"]}
 
   """
+  def put_option(%Builder{} = builder, key) do
+    Builder.put_option(builder, key)
+  end
+
   def put_option(%Builder{} = builder, key, value) do
     Builder.put_option(builder, key, value)
   end

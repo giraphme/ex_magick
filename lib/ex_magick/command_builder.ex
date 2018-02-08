@@ -9,6 +9,14 @@ defmodule ExMagick.CommandBuilder do
     }
   end
 
+  def put_option(%__MODULE__{options: options} = builder, key)
+      when is_list(options) do
+    %__MODULE__{
+      builder
+      | options: Enum.concat(builder.options, ["-#{key}"])
+    }
+  end
+
   def put_option(%__MODULE__{options: options} = builder, key, value)
       when is_list(options) do
     %__MODULE__{
